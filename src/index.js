@@ -1,14 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
-import 'react-hot-loader/patch';
-import {Provider} from 'react-redux'
-import createHistory from 'history/createBrowserHistory'
-import qhistory from 'qhistory'
-import {stringify, parse} from 'qs'
-import {Router} from 'react-router'
+import {Provider} from 'react-redux';
+import {Router} from 'react-router';
+import createHistory from 'history/createBrowserHistory';
+import qhistory from 'qhistory';
+import {stringify, parse} from 'qs';
 import {AppContainer} from 'react-hot-loader';
-import configureStore from './store/configureStore'
-import App from './app'
+import configureStore from './store/configureStore';
+import App from './app';
 
 const browserHistory = createHistory();
 const history = qhistory(browserHistory, stringify, parse);
