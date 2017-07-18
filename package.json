@@ -42,6 +42,7 @@
     "html-webpack-plugin": "^2.29.0",
     "react-hot-loader": "next",
     "run-sequence": "^2.0.0",
+    "webpack-dashboard": "^0.4.0",
     "webpack-dev-server": "^2.5.1"
   }
 }

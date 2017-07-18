@@ -33,7 +33,7 @@ gulp.task("webpack-dev-server", function(callback) {
     hot: true,
     compress: true,
     inline: true,
-    //quiet: true,
+    quiet: true,
     historyApiFallback: true,
     disableHostCheck: true,
     proxy: {

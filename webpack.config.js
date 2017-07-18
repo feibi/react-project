@@ -2,12 +2,11 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-//const DashboardPlugin = require('webpack-dashboard/plugin');
+const Dashboard = require('webpack-dashboard');
+const DashboardPlugin = require('webpack-dashboard/plugin');
+const dashboard = new Dashboard();
+const vendors = ['react', 'react-dom'];
 
-const vendors = [
-  'react', 'react-dom'
-  // ...其它库
-];
 module.exports = {
   entry: {
     index: [
@@ -70,6 +69,7 @@ module.exports = {
 
   plugins: [
     // 构建优化插件
+    new DashboardPlugin(dashboard.setData),
     new HtmlwebpackPlugin({
       template: __dirname + '/assets/index.html', //html模板路径
       filename: 'index.html',
