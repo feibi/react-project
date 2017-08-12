@@ -1,0 +1,64 @@
+@prefixCls: 'message';
+
+.@{prefixCls} {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 1111;
+    pointer-events: none;
+    &-item {
+        padding: 0 8px 15px;
+        text-align: center;
+    }
+    &-item-content {
+        position: relative;
+        display: inline-block;
+        font-size: 12px;
+        border-radius: 4px;
+        background: #fff;
+        padding: 8px 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+        pointer-events: all;
+    }
+    &-item-close {
+        position: absolute;
+        top: 3px;
+        right: 0;
+        width: 20px;
+        cursor: pointer;
+        line-height:1;
+        font-size: 16px;
+        opacity: .3;
+        transition: opacity .1s ease;
+        &:after {
+            content: '×';
+        }
+
+        &:hover{
+            opacity: 1;
+        }
+    }
+}
+
+.@{prefixCls}-enter {
+    opacity: 0.01;
+    transform: translate3d(0, -15px, 0);
+}
+
+.@{prefixCls}-enter.@{prefixCls}-enter-active {
+    opacity: 1;
+    transition: all 300ms cubic-bezier(.08, .82, .17, 1);
+    transform: translate3d(0, 0, 0);
+}
+
+.@{prefixCls}-leave {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.@{prefixCls}-leave.@{prefixCls}-leave-active {
+    opacity: 0.01;
+    transition: all 200ms cubic-bezier(.6, .04, .98, .34);
+    transform: translate3d(0, -15px, 0);
+}

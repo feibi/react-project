@@ -1,30 +1,31 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlwebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-require('react-hot-loader/patch');
+const webpack = require("webpack");
+const path = require("path");
+const HtmlwebpackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+require("react-hot-loader/patch");
 //const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const vendors = [
-  'react', 'react-dom'
+  "react",
+  "react-dom"
   // ...其它库
 ];
 module.exports = {
   entry: {
     index: [
-      './src/index' // Your appʼs entry point
+      "./src/index" // Your appʼs entry point
     ],
-    "vendor": vendors
+    vendor: vendors
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: 'js/[name]-[hash:8].js',
+    filename: "js/[name]-[hash:8].js",
     // 「入口分块(entry chunk)」的文件名模板（出口分块？）
-    chunkFilename: 'js/page[name]-[chunkhash:8].js',
+    chunkFilename: "js/page[name]-[chunkhash:8].js",
     publicPath: "/", // string
     // 输出解析文件的目录，url 相对于 HTML 页面
 
-    library: "[name]", // string,
+    library: "[name]" // string,
     // 导出库(exported library)的名称
 
     //libraryTarget: "umd", // 通用模块定义
@@ -35,28 +36,39 @@ module.exports = {
       {
         test: /\.js?$/,
         include: [path.resolve(__dirname, "src")],
-        use: ['react-hot-loader/webpack', 'babel-loader']
-      }, {
+        use: ["react-hot-loader/webpack", "babel-loader"]
+      },
+      {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({fallback: "style-loader", use: "css-loader?modules"})
-      }, {
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader?modules"
+        })
+      },
+      {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader']
+          fallback: "style-loader",
+          use: [
+            {
+              loader: "css-loader",
+              options: {
+                modules: true,
+                localIdentName: "[local]--[hash:base64:5]"
+              }
+            },
+            {
+              loader: "less-loader"
+            }
+          ]
         })
       }
     ]
   },
 
   resolve: {
-    modules: [
-      "node_modules",
-      path.resolve(__dirname, "src")
-    ],
-    extensions: [
-      ".js", ".json", ".jsx", ".css", ".less"
-    ],
+    modules: ["node_modules", path.resolve(__dirname, "src")],
+    extensions: [".js", ".json", ".jsx", ".css", ".less"],
     // 使用的扩展名
     alias: {
       //"module": path.resolve(__dirname, "app/third/module.js"),
@@ -80,13 +92,20 @@ module.exports = {
   plugins: [
     // 构建优化插件
     new HtmlwebpackPlugin({
-      template: __dirname + '/assets/index.html', //html模板路径
-      filename: 'index.html',
+      template: __dirname + "/assets/index.html", //html模板路径
+      filename: "index.html",
       inject: true, //允许插件修改哪些内容，包括head与body
       hash: false //为静态资源生成hash值
     }), //添加我们的插件 会自动生成一个html文件
-    new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'js/[name]-[hash:8].js', minChunks: Infinity}),
-    new ExtractTextPlugin({filename: 'style/build.min.css', allChunks: true}),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendor",
+      filename: "js/[name]-[hash:8].js",
+      minChunks: Infinity
+    }),
+    new ExtractTextPlugin({
+      filename: "style/build.[hash:8].css",
+      allChunks: true
+    }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -96,10 +115,12 @@ module.exports = {
       sourceMap: false
     }),
     // 编译时(compile time)插件
-    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify("production")}),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify("production")
+    }),
     // webpack-dev-server 强化插件
     //  new DashboardPlugin(),
-    new webpack.LoaderOptionsPlugin({minimize: true}),
+    new webpack.LoaderOptionsPlugin({ minimize: true }),
     new webpack.HotModuleReplacementPlugin()
   ]
-}
+};
