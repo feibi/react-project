@@ -18,7 +18,7 @@ export default function configureStore(history) {
   }
 
   const store = createStore(rootReducer, enhancer);
-  //sagaMiddleware.run(sagas);
+  sagaMiddleware.run(sagas);
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {

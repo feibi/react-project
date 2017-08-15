@@ -6,9 +6,9 @@ import {
   select,
   takeEvery,
   all
-} from 'redux-saga/effects'
-import testSaga from './test'
+} from "redux-saga/effects";
+import { watchIncrementAsync } from "./test";
 
-export default function * root() {
-  yield all([fork(testSaga)])
+export default function* root() {
+  yield fork(watchIncrementAsync);
 }

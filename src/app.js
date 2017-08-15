@@ -9,9 +9,9 @@ import style from "./less/base";
 
 const App = ({}) => {
   return (
-    <div>
-      <Header />
-      <div className={style["container"]}>
+    <div className={style["container"]}>
+      <Header>menu</Header>
+      <div className={style["page-wrapper"]}>
         <Routes />
       </div>
     </div>

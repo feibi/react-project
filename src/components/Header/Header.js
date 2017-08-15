@@ -1,12 +1,18 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Headroom from "headroom.js";
 import style from "./index.css";
 
 class Header extends Component {
+  static propTypes = {
+    children: PropTypes.any
+  };
+
   constructor(props) {
     super(props);
     this.headroom = null;
   }
+
   componentDidMount() {
     const myElement = this.refs.header;
     this.headroom = new Headroom(myElement, {
@@ -28,7 +34,9 @@ class Header extends Component {
   render() {
     return (
       <header ref="header" className="headroom">
-        <div className="header-wrapper">sdfasdasd</div>
+        <div className="header-wrapper">
+          {this.props.children}
+        </div>
       </header>
     );
   }
