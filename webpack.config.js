@@ -4,9 +4,15 @@ const HtmlwebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const Dashboard = require("webpack-dashboard");
 const DashboardPlugin = require("webpack-dashboard/plugin");
+const HappyPack = require("happypack");
 const dashboard = new Dashboard();
 const vendors = ["react", "react-dom"];
-
+const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
+const happypackLoaderPath = path.resolve(
+  __dirname,
+  "./node_modules",
+  "happypack/loader"
+);
 module.exports = {
   entry: {
     index: [
@@ -31,31 +37,20 @@ module.exports = {
       {
         test: /\.js?$/,
         include: [path.resolve(__dirname, "src")],
-        use: ["react-hot-loader/webpack", "babel-loader"]
+        use: happypackLoaderPath + "?id=js"
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: "css-loader"
+          use: happypackLoaderPath + "?id=css"
         })
       },
       {
         test: /\.less$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: [
-            {
-              loader: "css-loader",
-              options: {
-                modules: true,
-                localIdentName: "[path][name]__[local]--[hash:base64:5]"
-              }
-            },
-            {
-              loader: "less-loader"
-            }
-          ]
+          use: happypackLoaderPath + "?id=less"
         })
       }
     ]
@@ -80,6 +75,30 @@ module.exports = {
 
   plugins: [
     // 构建优化插件
+    new HappyPack({
+      id: "css",
+      threadPool: happyThreadPool,
+      loaders: ["css-loader"]
+    }),
+    new HappyPack({
+      id: "js",
+      threadPool: happyThreadPool,
+      loaders: ["babel-loader"]
+    }),
+    new HappyPack({
+      id: "less",
+      threadPool: happyThreadPool,
+      loaders: [
+        {
+          path: "css-loader",
+          query: {
+            modules: true,
+            localIdentName: "[path][name]__[local]--[hash:base64:5]"
+          }
+        },
+        "less-loader"
+      ]
+    }),
     new DashboardPlugin(dashboard.setData),
     new HtmlwebpackPlugin({
       template: __dirname + "/assets/index.html", //html模板路径
