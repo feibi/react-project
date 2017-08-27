@@ -5,8 +5,6 @@ let gulp = require("gulp"),
 
 let webpack = require("webpack");
 let WebpackDevServer = require("webpack-dev-server");
-let webpackConfig = require("./webpack.config.js");
-let webpackserver = require("./webpack.prod.config.js");
 
 gulp.task("default", ["webpack-dev-server"]);
 
@@ -19,6 +17,7 @@ gulp.task('clean', function() {
 gulp.task("webpack-dev-server", function(callback) {
   // modify some webpack config
   // options
+  let webpackConfig = require("./webpack.config.js");
   let myConfig = Object.create(webpackConfig);
   // myConfig.devtool = "eval";
   // Start a webpack-dev-server
@@ -61,6 +60,7 @@ gulp.task("build", ["clean"], function() {
 });
 
 gulp.task("webpack:build", function(callback) {
+  let webpackserver = require("./webpack.prod.config.js");
   let myConfig = Object.create(webpackserver);
   // run webpack
   webpack(myConfig, function(err, stats) {

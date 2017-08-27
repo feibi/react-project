@@ -213,7 +213,7 @@ async-each@^1.0.0:
 
 async@1.5.0:
   version "1.5.0"
-  resolved "http://npm.e-ports.com/async/-/async-1.5.0.tgz#2796642723573859565633fc6274444bee2f8ce3"
+  resolved "http://registry.npm.taobao.org/async/download/async-1.5.0.tgz#2796642723573859565633fc6274444bee2f8ce3"
 
 async@^1.5.2:
   version "1.5.2"
@@ -2497,9 +2497,9 @@ handle-thing@^1.2.5:
   version "1.2.5"
   resolved "http://registry.npm.taobao.org/handle-thing/download/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
 
-happypack@^4.0.0-beta.2:
-  version "4.0.0-beta.2"
-  resolved "http://npm.e-ports.com/happypack/-/happypack-4.0.0-beta.2.tgz#552e75d17292d5142c84be32f9b255d91e40e020"
+happypack@^4.0.0-beta.4:
+  version "4.0.0-beta.4"
+  resolved "http://registry.npm.taobao.org/happypack/download/happypack-4.0.0-beta.4.tgz#74a01c69e4f0c2add4809b40739533d0cc023436"
   dependencies:
     async "1.5.0"
     json-stringify-safe "5.0.1"
@@ -4835,7 +4835,7 @@ sequencify@~0.0.7:
 
 serialize-error@^2.1.0:
   version "2.1.0"
-  resolved "http://npm.e-ports.com/serialize-error/-/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
+  resolved "http://registry.npm.taobao.org/serialize-error/download/serialize-error-2.1.0.tgz#50b679d5635cdf84667bdc8e59af4e5b81d5f60a"
 
 serve-index@^1.7.2:
   version "1.9.0"

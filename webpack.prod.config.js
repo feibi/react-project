@@ -2,7 +2,6 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlwebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-require("react-hot-loader/patch");
 //const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const vendors = [
@@ -36,13 +35,13 @@ module.exports = {
       {
         test: /\.js?$/,
         include: [path.resolve(__dirname, "src")],
-        use: ["react-hot-loader/webpack", "babel-loader"]
+        use: ["babel-loader"]
       },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: "css-loader?modules"
+          use: "css-loader"
         })
       },
       {
@@ -121,6 +120,5 @@ module.exports = {
     // webpack-dev-server 强化插件
     //  new DashboardPlugin(),
     new webpack.LoaderOptionsPlugin({ minimize: true }),
-    new webpack.HotModuleReplacementPlugin()
   ]
 };
