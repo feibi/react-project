@@ -7,7 +7,7 @@ import Routes from "./routes";
 import Main from "./test/main";
 import style from "./less/base";
 
-const App = ({}) => {
+const App = () => {
   return (
     <div className={style["container"]}>
       <Header>menu</Header>

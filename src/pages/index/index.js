@@ -28,7 +28,7 @@ class Index extends React.Component {
         <div>
           {count}
         </div>
-        <Link to="/list">To List</Link>
+        <Link to="/list">To List Page</Link>
       </div>
     );
   }

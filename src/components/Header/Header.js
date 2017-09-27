@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Headroom from "headroom.js";
-import style from "./index.css";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import Headroom from 'headroom.js';
+import './index.css';
 
 class Header extends Component {
   static propTypes = {
@@ -14,14 +14,14 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const myElement = this.refs.header;
+    const myElement = this.header;
     this.headroom = new Headroom(myElement, {
       tolerance: 5,
       offset: 205,
       classes: {
-        initial: "animated",
-        pinned: "slideDown",
-        unpinned: "slideUp"
+        initial: 'animated',
+        pinned: 'slideDown',
+        unpinned: 'slideUp'
       }
     });
     this.headroom.init();
@@ -33,10 +33,8 @@ class Header extends Component {
 
   render() {
     return (
-      <header ref="header" className="headroom">
-        <div className="header-wrapper">
-          {this.props.children}
-        </div>
+      <header ref={ref => (this.header = ref)} className="headroom">
+        <div className="header-wrapper">{this.props.children}</div>
       </header>
     );
   }

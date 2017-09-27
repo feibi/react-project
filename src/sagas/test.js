@@ -1,5 +1,5 @@
-import { put, call, takeEvery, takeLatest } from "redux-saga/effects";
-import { increment } from "../actions";
+import { put, call, takeLatest } from 'redux-saga/effects';
+import { increment } from '../actions';
 
 export const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -9,5 +9,5 @@ export function* incrementAsync(action) {
 }
 
 export function* watchIncrementAsync() {
-  yield takeLatest("INCREMENT_ASYNC", incrementAsync);
+  yield takeLatest('INCREMENT_ASYNC', incrementAsync);
 }

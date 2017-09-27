@@ -22,6 +22,7 @@ export default function configureStore(history) {
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
+      // eslint-disable-next-line
       const nextRootReducer = require('../reducers').default
       store.replaceReducer(nextRootReducer)
     })

@@ -39,6 +39,7 @@ class Bundle extends Component {
 }
 
 const lazyLoad = (module) => {
+  // eslint-disable-next-line
   return function(props) {
     return (
       <Bundle load={module}>

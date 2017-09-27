@@ -29,7 +29,8 @@ render(App);
 
 if (module.hot) {
   module.hot.accept('./app', () => {
-    const NextApp = require('./app').default;
+    // eslint-disable-next-line
+    const NextApp = require('./app').default; 
     render(NextApp)
   });
 }
