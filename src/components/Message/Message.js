@@ -2,6 +2,7 @@
  * Created by zylee on 2017/3/13.
  */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import MessageItem from './MessageItem';
@@ -113,6 +114,10 @@ Message.newInstance = function(properties) {
 
 Message.defaultProps = {
   prefixCls: 'message'
+};
+
+Message.propTypes = {
+  prefixCls: PropTypes.string
 };
 
 export default Message;

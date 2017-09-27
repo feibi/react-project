@@ -1,14 +1,15 @@
-import {createStore, applyMiddleware, compose} from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import {routerMiddleware} from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
-import sagas from '../sagas'
+import sagas from '../sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore(history) {
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  const router = routerMiddleware(history)
+  const composeEnhancers =
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const router = routerMiddleware(history);
 
   let middleware = [router, sagaMiddleware];
   let enhancer = applyMiddleware(...middleware);
@@ -23,10 +24,10 @@ export default function configureStore(history) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
       // eslint-disable-next-line
-      const nextRootReducer = require('../reducers').default
-      store.replaceReducer(nextRootReducer)
-    })
+      const nextRootReducer = require('../reducers').default;
+      store.replaceReducer(nextRootReducer);
+    });
   }
-  store.runSaga = sagaMiddleware.run
-  return store
+  store.runSaga = sagaMiddleware.run;
+  return store;
 }

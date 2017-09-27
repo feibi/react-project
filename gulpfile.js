@@ -1,28 +1,26 @@
-let gulp = require("gulp"),
-  clean = require("gulp-clean"),
+let gulp = require('gulp'),
+  clean = require('gulp-clean'),
   runSequence = require('run-sequence'),
-  gutil = require("gulp-util");
+  gutil = require('gulp-util');
 
-let webpack = require("webpack");
-let WebpackDevServer = require("webpack-dev-server");
+let webpack = require('webpack');
+let WebpackDevServer = require('webpack-dev-server');
 
-gulp.task("default", ["webpack-dev-server"]);
+gulp.task('default', ['webpack-dev-server']);
 
 gulp.task('clean', function() {
-  return gulp.src([
-    'build', 'dist'
-  ], {read: false}).pipe(clean());
+  return gulp.src(['build', 'dist'], { read: false }).pipe(clean());
 });
 
-gulp.task("webpack-dev-server", function(callback) {
+gulp.task('webpack-dev-server', function(callback) {
   // modify some webpack config
   // options
-  let webpackConfig = require("./webpack.config.js");
+  let webpackConfig = require('./webpack.config.js');
   let myConfig = Object.create(webpackConfig);
   // myConfig.devtool = "eval";
   // Start a webpack-dev-server
   new WebpackDevServer(webpack(myConfig), {
-    contentBase: "./build/",
+    contentBase: './build/',
     publicPath: '/',
     stats: {
       colors: true,
@@ -47,27 +45,29 @@ gulp.task("webpack-dev-server", function(callback) {
         changeOrigin: true
       }
     }
-  }).listen(8888, "0.0.0.0", function(err) {
-    if (err)
-      throw new gutil.PluginError("webpack-dev-server", err);
-    gutil.log("[webpack-dev-server]", "http://localhost:8080/webpack-" + "dev-server/index.html");
+  }).listen(8888, '0.0.0.0', function(err) {
+    if (err) throw new gutil.PluginError('webpack-dev-server', err);
+    gutil.log(
+      '[webpack-dev-server]',
+      'http://localhost:8080/webpack-' + 'dev-server/index.html'
+    );
   });
 });
 
 // Production build
-gulp.task("build", ["clean"], function() {
-  runSequence(["webpack:build"]);
+gulp.task('build', ['clean'], function() {
+  runSequence(['webpack:build']);
 });
 
-gulp.task("webpack:build", function(callback) {
-  let webpackserver = require("./webpack.prod.config.js");
+gulp.task('webpack:build', function(callback) {
+  let webpackserver = require('./webpack.prod.config.js');
   let myConfig = Object.create(webpackserver);
   // run webpack
   webpack(myConfig, function(err, stats) {
     if (err) {
-      throw new gutil.PluginError("webpack:build", err);
+      throw new gutil.PluginError('webpack:build', err);
     }
-    gutil.log("[webpack:build]", stats.toString({colors: true}));
+    gutil.log('[webpack:build]', stats.toString({ colors: true }));
     callback();
   });
 });

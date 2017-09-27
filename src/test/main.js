@@ -9,9 +9,8 @@ const Main = () => {
       <input />
     </div>
   );
-}
-
-Main.propTypes = {
 };
+
+Main.propTypes = {};
 
 export default Main;

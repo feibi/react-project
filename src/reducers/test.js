@@ -1,4 +1,4 @@
-import { INCREMENT } from "../actions";
+import { INCREMENT } from '../actions';
 
 export function count(state = 0, action) {
   switch (action.type) {
