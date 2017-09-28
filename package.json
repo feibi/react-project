@@ -4,10 +4,11 @@
   "description": "webpack3,redux,react-saga,react-router4",
   "main": "index.js",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "gulp",
-    "build:dll": "webpack --config webpack.dll.config.js --progress",
+    "clean": "gulp clean",
+    "start": "gulp",
     "build": "gulp build",
+    "dll": "NODE_ENV=production webpack --config webpack.dll.config.js --progress",
+    "dll:dev": "NODE_ENV=development webpack --config webpack.dll.config.js --progress",
     "lint": "eslint --ext .js src",
     "precommit": "lint-staged"
   },
@@ -37,6 +38,7 @@
     "webpack": "^3.3.0"
   },
   "devDependencies": {
+    "add-asset-html-webpack-plugin": "^2.1.2",
     "babel-core": "^6.25.0",
     "babel-eslint": "^8.0.1",
     "babel-loader": "^7.1.1",

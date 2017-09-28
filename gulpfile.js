@@ -55,7 +55,7 @@ gulp.task('webpack-dev-server', function(callback) {
 });
 
 // Production build
-gulp.task('build', ['clean'], function() {
+gulp.task('build', function() {
   runSequence(['webpack:build']);
 });
 

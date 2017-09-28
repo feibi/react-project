@@ -5,8 +5,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const Dashboard = require('webpack-dashboard');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const HappyPack = require('happypack');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+
+const { names } = require('./public.config');
+const { buildName } = names;
+
+const manifestPath = path.join(__dirname, buildName, 'vendor-manifest.json');
+
 const dashboard = new Dashboard();
-const vendors = ['react', 'react-dom'];
 const happyThreadPool = HappyPack.ThreadPool({ size: 4 });
 const happypackLoaderPath = path.resolve(
   __dirname,
@@ -20,11 +26,10 @@ module.exports = {
       'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
       'react-hot-loader/patch', // RHL patch
       './src/index' // Your appʼs entry point
-    ],
-    vendor: vendors
+    ]
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, buildName),
     filename: 'js/[name]-[hash:8].js',
     // 「入口分块(entry chunk)」的文件名模板（出口分块？）
     chunkFilename: 'js/page.[name]-[chunkhash:8].js',
@@ -103,27 +108,30 @@ module.exports = {
     new HtmlwebpackPlugin({
       template: __dirname + '/assets/index.html', //html模板路径
       filename: 'index.html',
-      bundleName: 'vendors.dll.js',
+      //bundleName: 'vendors.dll.js',
       inject: true, //允许插件修改哪些内容，包括head与body
       hash: false //为静态资源生成hash值
     }), //添加我们的插件 会自动生成一个html文件
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      /**
+       * 在这里引入 manifest 文件
+       */
+      manifest: require(manifestPath)
+      //name:'[name]'
+    }),
+    new AddAssetHtmlPlugin({
+      filepath: path.join(__dirname, buildName, '*.dll.js')
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'js/[name]-[hash:8].js',
       minChunks: Infinity
     }),
     new ExtractTextPlugin({
-      filename: 'style/build.[hash:8].css',
+      filename: 'style/style.[hash:8].css',
       allChunks: true
     }),
-    // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   /**
-    //    * 在这里引入 manifest 文件
-    //    */
-    //   manifest: require('./dist/vendor-manifest.json'),
-    //   //name:'[name]'
-    // }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
