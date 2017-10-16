@@ -6,6 +6,9 @@ let gulp = require('gulp'),
 let webpack = require('webpack');
 let WebpackDevServer = require('webpack-dev-server');
 
+const port = process.env.npm_package_config_port || 3000;
+const host = process.env.npm_package_config_host || 'localhost';
+
 gulp.task('default', ['webpack-dev-server']);
 
 gulp.task('clean', function() {
@@ -45,11 +48,11 @@ gulp.task('webpack-dev-server', function(callback) {
         changeOrigin: true
       }
     }
-  }).listen(8888, '0.0.0.0', function(err) {
+  }).listen(port, host, function(err) {
     if (err) throw new gutil.PluginError('webpack-dev-server', err);
     gutil.log(
       '[webpack-dev-server]',
-      'http://localhost:8080/webpack-' + 'dev-server/index.html'
+      `http://${host}:${port}/webpack-dev-server/index.html`
     );
   });
 });

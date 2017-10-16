@@ -45,14 +45,16 @@
       {
         "singleQuote": true,
         "trailingComma": "none",
-        "bracketSpacing": true,
-        "parser": "flow"
+        "bracketSpacing": true
       }
     ],
     "func-names": [0]
   },
   "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 6,
     "ecmaFeatures": {
+      "jsx": true,
       "experimentalObjectRestSpread": true
     }
   },

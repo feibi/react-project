@@ -2,6 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+@connect(state => {
+  return {
+    count: state.count
+  };
+})
 class Index extends React.Component {
   static propTypes = {
     count: PropTypes.number,
@@ -32,8 +38,4 @@ class Index extends React.Component {
   }
 }
 
-export default connect(state => {
-  return {
-    count: state.count
-  };
-})(Index);
+export default Index;

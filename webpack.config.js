@@ -19,13 +19,17 @@ const happypackLoaderPath = path.resolve(
   './node_modules',
   'happypack/loader'
 );
+
+const port = process.env.npm_package_config_port || 3000;
+const host = process.env.npm_package_config_host || 'localhost';
+
 module.exports = {
   entry: {
     index: [
-      'webpack-dev-server/client?http://0.0.0.0:8888', // WebpackDevServer host and port
-      'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-      'react-hot-loader/patch', // RHL patch
-      './src/index' // Your appʼs entry point
+      `webpack-dev-server/client?http://${host}:${port}`,
+      'webpack/hot/only-dev-server',
+      'react-hot-loader/patch',
+      './src/index'
     ]
   },
   output: {
