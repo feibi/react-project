@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import pic from '../../../assets/images/pic.jpg';
 
 @connect(state => {
   return {
@@ -33,6 +34,7 @@ class Index extends React.Component {
         <button onClick={this.handleClick}>点击</button>
         <div>{count}</div>
         <Link to="/list">To List Page</Link>
+        <img src={pic} />
       </div>
     );
   }

@@ -61,6 +61,18 @@ module.exports = {
           fallback: 'style-loader',
           use: happypackLoaderPath + '?id=less'
         })
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 5120,
+              name: '[path][name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
